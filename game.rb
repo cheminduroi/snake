@@ -51,7 +51,7 @@ class Game
             puts rowToDisplay + ("|".yellow)
         end
         puts "+#{"-"*@width}+".yellow
-        puts "Score: #@playerScore\n"
+        print "Score: #@playerScore\n\n"
     end
 
     def getNewApple
@@ -73,14 +73,15 @@ class Game
 
     def endGameHandler
         if @playerScore > getHighScore
-            puts "\nCONGRATS! NEW HIGH SCORE OF #@playerScore!\n".green
+            print "\nCONGRATS! NEW HIGH SCORE OF #@playerScore!\n\n".green
             setHighScore
         else
-            puts "\nGAME OVER! SCORE: #@playerScore\n\n"
+            print "\nGAME OVER! SCORE: #@playerScore\n\n"
         end
     end
 
     def start
+        print "Welcome to Snake! Press Q to quit.\n\n"
         @apple = getNewApple
         render
         while true do
@@ -93,8 +94,11 @@ class Game
                 @snake.setDirection = LEFT
             when "D", @snake.direction != LEFT
                 @snake.setDirection = RIGHT
+            when "Q"
+                endGameHandler
+                break
             else
-                puts "Invalid direction. Valid directions: W (UP), A (LEFT), S (DOWN), D (RIGHT)\n".red
+                print "Invalid direction. Valid directions: W (UP), A (LEFT), S (DOWN), D (RIGHT)\n\n".red
                 next
             end
             snakeNextDirection = [
